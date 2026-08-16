@@ -1,24 +1,238 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111827"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="RADPOCKET"><title>RADPOCKET</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:540px;margin:auto;min-height:100vh;background:#fff}.hero{background:#111827;color:#fff;padding:30px 18px 20px;padding-top:calc(30px + env(safe-area-inset-top))}.logo{font-size:30px;font-weight:800}.tag{color:#cbd5e1;margin-top:5px}.search{margin-top:18px;background:#fff;color:#64748b;border-radius:15px;padding:14px}.main{padding:18px}.section{margin:18px 0 10px;color:#64748b;font-size:12px;font-weight:800;letter-spacing:.08em}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{border:1px solid #e5e7eb;border-radius:17px;padding:15px;background:#fff;text-align:left;min-height:86px}.card b{display:block;font-size:17px}.card small{display:block;color:#64748b;margin-top:5px}.hidden{display:none!important}.back{border:0;background:none;padding:0;margin-bottom:12px;color:#334155;font-weight:700}.crumb{font-size:12px;color:#64748b}.title{font-size:29px;margin:4px 0 14px}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:8px}.tab{white-space:nowrap;border:1px solid #dbe1e8;border-radius:999px;background:#fff;padding:8px 12px;font-weight:700}.active{background:#111827;color:#fff}.block{border:1px solid #e5e7eb;border-radius:16px;padding:15px;margin:10px 0}.block h3{margin:0 0 9px}.block p{line-height:1.5}.block li{line-height:1.55}.quick{background:#eef2ff}.eye{background:#f0fdf4}.warn{background:#fff7ed}.pill{display:inline-block;border:1px solid #dbe1e8;border-radius:999px;padding:7px 10px;margin:3px;background:#fff;font-size:13px;font-weight:700}.footer{padding:18px;color:#64748b;font-size:11px;line-height:1.5;border-top:1px solid #e5e7eb}
-</style></head><body><div class="app"><header class="hero"><div class="logo">RADPOCKET</div><div class="tag">Emergency Radiography • v0.6</div><div class="search">🔎 Search examinations or presentations</div></header><main id="home" class="main">
-<div class="section">START WITH THE EXAMINATION</div><div class="grid">
-<button class="card" onclick="exam('Ankle',['AP • Mortise • Lateral'],'Malleolar fracture, talar injury, mortise widening, proximal fibular injury')"><b>🦴 Ankle</b><small>AP • Mortise • Lateral</small></button>
-<button class="card" onclick="exam('Shoulder',['AP • Rotation • Y / Axillary'],'Dislocation, proximal humeral fracture, greater tuberosity, AC/clavicle injury')"><b>💪 Shoulder</b><small>AP • Rotation • Trauma</small></button>
-<button class="card"><b>💪 Elbow</b><small>Coming next</small></button>
-<button class="card" onclick="exam('Wrist',['PA/DP • Lateral • Oblique • Scaphoid'],'Scaphoid injury, carpal malalignment, distal radius fracture, DRUJ abnormality')"><b>🖐️ Wrist</b><small>PA/DP • Lateral • Oblique</small></button>
-<button class="card"><b>🦴 Hip</b><small>Coming next</small></button>
-<button class="card" onclick="exam('Knee',['AP • Lateral • Trauma'],'Patellar fracture, tibial plateau injury, fibular-head injury, dislocation, effusion')"><b>🦵 Knee</b><small>AP • Lateral • Trauma</small></button>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<title>RADPOCKET v0.7</title>
+<style>
+:root{--navy:#101827;--ink:#172033;--muted:#687286;--line:#dfe4ec;--card:#fff;--bg:#f5f7fa;--accent:#5b4bb7;--warn:#fff5df;--danger:#fff0f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+button,input{font:inherit}.app{max-width:920px;margin:auto;min-height:100vh;background:var(--bg)}
+header{background:var(--navy);color:white;padding:28px 20px 24px;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px #0002}
+.brand{font-size:34px;font-weight:850;letter-spacing:-1px}.sub{color:#c8cfdb;margin-top:5px;font-size:16px}
+.search{margin-top:18px;background:#fff;border-radius:18px;padding:13px 16px;display:flex;gap:10px;align-items:center}.search input{border:0;outline:0;width:100%;font-size:17px;color:var(--ink)}
+main{padding:20px}.back{border:0;background:var(--navy);color:white;border-radius:12px;padding:10px 14px;margin-bottom:14px;font-weight:700}
+h2{font-size:22px;margin:8px 0 14px}h3{font-size:18px;margin:22px 0 9px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:left;box-shadow:0 1px 2px #00000008}.card button,.tile{width:100%;border:0;background:none;text-align:left;cursor:pointer}.card strong{font-size:20px}.card small{display:block;color:var(--muted);font-size:14px;margin-top:6px;line-height:1.35}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}.panel-title{padding:16px 18px;font-weight:800;font-size:18px;border-bottom:1px solid var(--line)}.panel-body{padding:16px 18px;line-height:1.5}
+.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:14px}.tabs button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;font-weight:700;color:var(--muted)}.tabs button.active{background:var(--navy);color:#fff}
+.info{padding:12px 14px;border-radius:12px;background:#eef3ff;margin:10px 0}.warn{background:var(--warn)}.danger{background:var(--danger)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{font-weight:800}
+.visual-grid{display:grid;grid-template-columns:1fr;gap:12px}.visual-card{border:1px solid var(--line);border-radius:15px;padding:12px;background:#f8fafc}.visual-card h4{margin:2px 0 8px;font-size:15px}.visual-card p{font-size:13px;color:var(--muted);margin:6px 0}.visual-card svg{width:100%;height:auto;display:block}.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.legend span{font-size:12px;font-weight:700;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 8px}
+ul{padding-left:21px;margin:8px 0}li{margin:5px 0}.pill{display:inline-block;background:#eeeafa;color:#4a3b9b;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:800;margin:2px}
+.diagram{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:10px;margin:10px 0;text-align:center}.diagram svg{max-width:100%;height:auto}
+.footer{padding:20px;color:var(--muted);font-size:12px;line-height:1.5}.hidden{display:none!important}
+@media(max-width:600px){.grid{grid-template-columns:1fr 1fr}.brand{font-size:30px}main{padding:15px}.card{padding:15px}.card strong{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">RADPOCKET</div>
+  <div class="sub">Emergency Radiography · v0.7</div>
+  <label class="search">🔎 <input id="search" placeholder="Search examinations, views or clinical problems"></label>
+</header>
+
+<main id="home">
+  <h2>Start with the examination</h2>
+  <div class="grid">
+    <div class="card"><button data-open="ankle"><strong>🦴 Ankle</strong><small>AP · Mortise · Lateral · Trauma</small></button></div>
+    <div class="card"><button disabled><strong>💪 Shoulder</strong><small>Coming next</small></button></div>
+    <div class="card"><button disabled><strong>🦴 Elbow</strong><small>Coming next</small></button></div>
+    <div class="card"><button disabled><strong>🖐️ Wrist</strong><small>Coming next</small></button></div>
+    <div class="card"><button disabled><strong>🦵 Hip</strong><small>Coming next</small></button></div>
+    <div class="card"><button disabled><strong>🦵 Knee</strong><small>Coming next</small></button></div>
+  </div>
+  <h2 style="margin-top:28px">Start with the patient problem</h2>
+  <div class="grid">
+    <div class="card"><button data-open="ottawa"><strong>🦶 Ankle trauma</strong><small>Ottawa rules · when to image</small></button></div>
+    <div class="card"><button data-open="trauma"><strong>🚨 Unable to weight-bear</strong><small>Trauma workflow and positioning</small></button></div>
+  </div>
+</main>
+
+<main id="ankle" class="hidden">
+<button class="back" data-home>← Back</button>
+<h2>🦴 Ankle radiography</h2>
+<div class="tabs" id="tabs">
+ <button class="active" data-tab="overview">Overview</button><button data-tab="ap">AP</button><button data-tab="mortise">Mortise</button><button data-tab="lateral">Lateral</button><button data-tab="trauma">Trauma</button><button data-tab="evaluate">Evaluate</button>
 </div>
-<div class="section">START WITH THE PATIENT PROBLEM</div><div class="grid">
-<button class="card" onclick="problem('FOOSH','Wrist • Scaphoid • Forearm','Distal radius/ulna, carpal alignment, scaphoid, DRUJ')"><b>🖐️ FOOSH</b><small>Fall onto outstretched hand</small></button>
-<button class="card" onclick="problem('Unable to weight-bear','Ankle • Foot • Knee • Hip/Pelvis','Alignment, cortical disruption, joints, soft tissues')"><b>🚶 Unable to weight-bear</b><small>Lower-limb trauma</small></button>
-<button class="card" onclick="problem('Shoulder trauma','Shoulder • Humerus','Glenohumeral alignment, proximal humerus, AC region, scapula')"><b>💥 Shoulder trauma</b><small>Fall / direct impact</small></button>
-<button class="card" onclick="problem('Road traffic trauma','C-spine • Chest • Pelvis • Other regions','Immobilisation, alignment, major fractures, chest complications')"><b>🚗 Road traffic trauma</b><small>Multi-region injury</small></button>
-</div><div class="section">QUICK ACCESS</div><div class="grid"><button class="card"><b>🚨 Trauma</b><small>Coming next</small></button><button class="card"><b>📖 Learn</b><small>Coming next</small></button></div>
-<div class="footer">Educational/reference prototype. Follow your department's current protocol, scope of practice and clinical governance.</div></main><div id="view" class="main hidden"></div></div>
+<section class="panel tabpanel" id="tab-overview">
+ <div class="panel-title">Standard ankle series</div>
+ <div class="panel-body">
+  <p><span class="pill">AP</span><span class="pill">Mortise</span><span class="pill">Lateral</span></p>
+  <p>Use the department's local protocol and referral/clinical information. The routine series is designed to assess the distal tibia and fibula, talus, ankle mortise and adjacent soft tissues.</p>
+  <div class="info"><b>Core principle:</b> centre and collimate to the ankle, include the relevant distal tibia/fibula and soft tissues, and obtain diagnostic images with minimal rotation and motion.</div>
+  <h3>Patient preparation</h3><ul><li>Confirm identity, examination and side; check the clinical history and mechanism of injury.</li><li>Remove external artefacts where practical.</li><li>Assess pain, mobility and whether the patient can safely stand or rotate the limb.</li><li>Use appropriate immobilisation/support in trauma rather than forcing the injured ankle into a position.</li></ul>
+  <h3>Common indications</h3><ul><li>Acute trauma, pain, swelling or suspected fracture/dislocation.</li><li>Follow-up of known fracture or post-reduction assessment where requested.</li><li>Persistent symptoms or other clinical indications according to local referral criteria.</li></ul>
+ </div>
+</section>
+<section class="panel tabpanel hidden" id="tab-visuals">
+ <div class="panel-title">🖼️ Positioning & anatomy visuals</div>
+ <div class="panel-body">
+  <div class="info"><b>Original educational diagrams:</b> these are simplified schematics, not patient images. They are designed to show the relationship between the patient, detector and central ray. Always use the local technique protocol.</div>
+  <div class="visual-grid">
+
+   <div class="visual-card">
+    <h4>AP ankle — basic setup</h4>
+    <svg viewBox="0 0 520 260" role="img" aria-label="Simplified AP ankle positioning diagram">
+      <rect x="265" y="25" width="170" height="210" rx="8" fill="#fff" stroke="#8792a5" stroke-width="3"/>
+      <text x="350" y="250" text-anchor="middle" font-size="15" fill="#687286">Detector</text>
+      <path d="M185 75 C150 90 145 135 170 170 L215 205 L245 188 L220 145 L225 95 Z" fill="#d9dee8" stroke="#4b5563" stroke-width="3"/>
+      <circle cx="220" cy="125" r="18" fill="#b8c0ce" stroke="#4b5563" stroke-width="3"/>
+      <path d="M220 65 L220 108" stroke="#111827" stroke-width="5"/>
+      <path d="M210 84 L220 105 L230 84" fill="none" stroke="#111827" stroke-width="3"/>
+      <text x="92" y="72" font-size="15" fill="#172033">Ankle / foot</text>
+      <text x="280" y="45" font-size="13" fill="#687286">IR / detector</text>
+      <line x1="220" y1="125" x2="350" y2="125" stroke="#5b4bb7" stroke-width="4" stroke-dasharray="8 6"/>
+      <text x="265" y="115" font-size="13" fill="#4a3b9b">CR → ankle joint</text>
+    </svg>
+    <div class="legend"><span>Patient supine/seated</span><span>Minimise rotation</span><span>Centre ankle</span></div>
+   </div>
+
+   <div class="visual-card">
+    <h4>Mortise — rotation concept</h4>
+    <svg viewBox="0 0 520 260" role="img" aria-label="Simplified mortise positioning diagram">
+      <rect x="270" y="30" width="160" height="200" rx="8" fill="#fff" stroke="#8792a5" stroke-width="3"/>
+      <path d="M185 65 L220 95 L245 150 L205 195 L165 160 L175 100 Z" fill="#d9dee8" stroke="#4b5563" stroke-width="3"/>
+      <circle cx="205" cy="130" r="20" fill="#b8c0ce" stroke="#4b5563" stroke-width="3"/>
+      <path d="M160 135 A75 75 0 0 0 215 65" fill="none" stroke="#5b4bb7" stroke-width="4"/>
+      <path d="M205 65 L220 72 L210 82" fill="none" stroke="#5b4bb7" stroke-width="3"/>
+      <text x="72" y="50" font-size="15" fill="#172033">Rotate the leg/foot as</text>
+      <text x="72" y="69" font-size="15" fill="#172033">required by local protocol</text>
+      <text x="315" y="220" text-anchor="middle" font-size="14" fill="#687286">Detector</text>
+      <line x1="205" y1="130" x2="350" y2="130" stroke="#111827" stroke-width="4" stroke-dasharray="8 6"/>
+      <text x="270" y="120" font-size="13" fill="#172033">CR → ankle joint</text>
+    </svg>
+    <div class="legend"><span>Common teaching: ~15–20°</span><span>Do not force trauma</span><span>Goal: open mortise</span></div>
+   </div>
+
+   <div class="visual-card">
+    <h4>Lateral — basic setup</h4>
+    <svg viewBox="0 0 520 260" role="img" aria-label="Simplified lateral ankle positioning diagram">
+      <rect x="270" y="30" width="160" height="200" rx="8" fill="#fff" stroke="#8792a5" stroke-width="3"/>
+      <path d="M180 65 L215 70 L245 115 L235 165 L195 195 L170 160 L180 110 Z" fill="#d9dee8" stroke="#4b5563" stroke-width="3"/>
+      <circle cx="205" cy="120" r="19" fill="#b8c0ce" stroke="#4b5563" stroke-width="3"/>
+      <path d="M205 30 L205 100" stroke="#111827" stroke-width="5"/>
+      <path d="M195 52 L205 32 L215 52" fill="none" stroke="#111827" stroke-width="3"/>
+      <line x1="205" y1="120" x2="350" y2="120" stroke="#5b4bb7" stroke-width="4" stroke-dasharray="8 6"/>
+      <text x="270" y="110" font-size="13" fill="#4a3b9b">CR → ankle joint</text>
+      <text x="350" y="220" text-anchor="middle" font-size="14" fill="#687286">Detector</text>
+    </svg>
+    <div class="legend"><span>Affected side closest</span><span>True lateral as tolerated</span><span>Include distal leg</span></div>
+   </div>
+
+   <div class="visual-card">
+    <h4>Key anatomy — ankle mortise</h4>
+    <svg viewBox="0 0 520 270" role="img" aria-label="Simplified ankle anatomy diagram">
+      <path d="M185 30 L250 30 L250 120 L235 150 L215 150 L195 120 Z" fill="#e4e8ef" stroke="#4b5563" stroke-width="3"/>
+      <path d="M150 85 L195 100 L195 175 L160 205 L135 175 Z" fill="#d1d7e2" stroke="#4b5563" stroke-width="3"/>
+      <path d="M250 100 L300 85 L315 175 L285 205 L250 175 Z" fill="#d1d7e2" stroke="#4b5563" stroke-width="3"/>
+      <path d="M195 150 Q250 120 300 150 L285 215 Q250 235 215 215 Z" fill="#bcc5d3" stroke="#4b5563" stroke-width="3"/>
+      <line x1="205" y1="150" x2="290" y2="150" stroke="#5b4bb7" stroke-width="5" stroke-dasharray="6 5"/>
+      <text x="330" y="75" font-size="15">Tibia / plafond</text>
+      <line x1="285" y1="85" x2="325" y2="70" stroke="#687286"/>
+      <text x="15" y="115" font-size="15">Medial malleolus</text>
+      <line x1="150" y1="120" x2="115" y2="110" stroke="#687286"/>
+      <text x="330" y="145" font-size="15">Lateral malleolus</text>
+      <line x1="300" y1="145" x2="325" y2="140" stroke="#687286"/>
+      <text x="330" y="205" font-size="15">Talus</text>
+      <line x1="285" y1="195" x2="325" y2="195" stroke="#687286"/>
+      <text x="330" y="240" font-size="15" fill="#4a3b9b">Mortise / joint space</text>
+    </svg>
+    <div class="legend"><span>Tibia</span><span>Fibula</span><span>Talus</span><span>Malleoli</span></div>
+   </div>
+
+  </div>
+  <div class="info"><b>Visual image-quality targets:</b> RCR trauma guidance emphasises adequate display of the ankle joint/mortise, malleoli and lower third of the leg on AP/mortise views, and appropriate coverage of the distal tibia/fibula, talus, ankle joint and adjacent anatomy on lateral views. citeturn0search0</div>
+  <p style="font-size:12px;color:#687286">These diagrams are intentionally simplified. They are not substitutes for a full positioning atlas or local departmental technique chart.</p>
+ </div>
+</section>
+<section class="panel tabpanel hidden" id="tab-ap">
+ <div class="panel-title">AP ankle</div><div class="panel-body">
+ <h3>Positioning</h3><ul><li>Patient supine or seated; leg extended as tolerated.</li><li>Place the ankle in a true AP position as far as pain permits; avoid unnecessary rotation.</li><li>Foot should be approximately perpendicular to the detector when tolerated.</li></ul>
+ <h3>Central ray & collimation</h3><ul><li>Centre to the ankle joint / midway between the malleoli according to local protocol.</li><li>Collimate to include the ankle joint, distal tibia/fibula and soft tissues.</li><li>Use the department's approved exposure factors and detector protocol rather than a fixed value from an app.</li></ul>
+ <div class="diagram"><svg viewBox="0 0 360 170" role="img" aria-label="AP ankle positioning schematic"><rect x="125" y="15" width="110" height="140" rx="5" fill="#fff" stroke="#8b95a7" stroke-width="3"/><path d="M180 35v82 M135 110h90" stroke="#5b4bb7" stroke-width="5"/><path d="M180 5v30" stroke="#222" stroke-width="4"/><path d="M165 25l15 10 15-10" fill="none" stroke="#222" stroke-width="3"/><text x="180" y="160" text-anchor="middle" font-size="14" fill="#687286">Detector / ankle centred</text></svg></div>
+ <h3>Image criteria</h3><ul><li>Ankle joint demonstrated without excessive rotation.</li><li>Distal tibia and fibula, talus and surrounding soft tissues included.</li><li>Medial and lateral malleoli visualised adequately; joint relationship assessed with the other views.</li></ul>
+ </div>
+</section>
+<section class="panel tabpanel hidden" id="tab-mortise">
+ <div class="panel-title">Mortise view</div><div class="panel-body">
+ <h3>Positioning</h3><ul><li>Supine or seated with the leg supported.</li><li>Internally rotate the entire leg/foot as required by your department to open the ankle mortise; a commonly taught position is around 15–20° internal rotation.</li><li>Do not force rotation in acute trauma; stop if pain or instability prevents safe positioning.</li></ul>
+ <h3>Central ray & collimation</h3><ul><li>Centre to the ankle joint / midway between the malleoli according to local protocol.</li><li>Collimate tightly to the ankle region while retaining the required anatomy.</li></ul>
+ <h3>Image criteria</h3><ul><li>Mortise should be well demonstrated with the talar dome and tibial plafond visible.</li><li>Medial, lateral and superior joint spaces should be assessable.</li><li>Distal tibiofibular relationship should be visible.</li></ul>
+ <div class="info"><b>Why mortise?</b> It reduces the overlap created by the AP view and improves assessment of the ankle joint space and distal tibiofibular relationship.</div>
+ </div>
+</section>
+<section class="panel tabpanel hidden" id="tab-lateral">
+ <div class="panel-title">Lateral ankle</div><div class="panel-body">
+ <h3>Positioning</h3><ul><li>Patient lateral or semi-lateral as tolerated; affected side closest to detector.</li><li>Flex the knee if needed for comfort and stability.</li><li>Keep the ankle in a true lateral position as closely as pain permits.</li></ul>
+ <h3>Central ray & collimation</h3><ul><li>Centre to the ankle joint according to local protocol.</li><li>Include distal tibia/fibula, talus, calcaneus as required for the ankle study and adjacent soft tissues.</li></ul>
+ <h3>Image criteria</h3><ul><li>Talus and ankle joint shown in lateral profile.</li><li>Distal tibia and fibula adequately included.</li><li>Minimal unwanted rotation; soft-tissue swelling and posterior malleolar region assessed.</li></ul>
+ </div>
+</section>
+<section class="panel tabpanel hidden" id="tab-trauma">
+ <div class="panel-title">Trauma modifications</div><div class="panel-body">
+ <div class="warn info"><b>Safety first:</b> Do not force a painful or potentially unstable ankle into routine positioning. Adapt the technique to the patient's injury, immobilisation and clinical condition.</div>
+ <h3>Before imaging</h3><ul><li>Check for deformity, open injury, severe swelling and neurovascular concerns.</li><li>Maintain immobilisation when indicated and follow local trauma/orthopaedic instructions.</li><li>Move the patient as little as necessary; use horizontal-beam or other modified positioning when required by local protocol.</li></ul>
+ <h3>Think beyond the ankle</h3><ul><li>Consider whether the clinical information suggests injury extending into the distal tibia/fibula or foot.</li><li>Look at the proximal fibula when the mechanism and tenderness raise concern for a more extensive injury.</li><li>Consider additional views or cross-sectional imaging when requested/clinically indicated.</li></ul>
+ <div class="danger info"><b>Do not miss:</b> obvious malalignment, dislocation, displaced fracture, widening/asymmetry of the mortise, or a suspicious subtle fracture line should trigger appropriate clinical escalation and/or additional imaging according to local practice.</div>
+ </div>
+</section>
+<section class="panel tabpanel hidden" id="tab-evaluate">
+ <div class="panel-title">Image evaluation checklist</div><div class="panel-body">
+ <table><tr><th>Check</th><th>Question</th></tr>
+ <tr><td>Patient / side</td><td>Correct patient, side marker and examination?</td></tr>
+ <tr><td>Coverage</td><td>Distal tibia/fibula, talus, ankle joint and relevant soft tissues included?</td></tr>
+ <tr><td>Position</td><td>AP/mortise/lateral positioning appropriate and rotation controlled?</td></tr>
+ <tr><td>Exposure</td><td>Bone detail and soft-tissue margins adequately demonstrated without unnecessary exposure?</td></tr>
+ <tr><td>Motion</td><td>Sharp cortical margins and trabecular detail?</td></tr>
+ <tr><td>Mortise</td><td>Joint space and distal tibiofibular relationship assessable?</td></tr>
+ <tr><td>Trauma</td><td>Any fracture, dislocation, subluxation or abnormal alignment?</td></tr></table>
+ <h3>👀 Visual quality check</h3>
+<div class="visual-grid">
+ <div class="visual-card"><h4>GOOD — mortise concept</h4><p>Joint space should be adequately demonstrated with appropriate positioning and minimal unwanted rotation.</p></div>
+ <div class="visual-card"><h4>NOT IDEAL — excessive rotation</h4><p>If the ankle is rotated beyond the intended projection, joint-space assessment can be compromised. Consider whether a repeat or modified view is justified under local protocol.</p></div>
+</div>
+<h3>Systematic review</h3><ul><li><b>Distal tibia:</b> plafond, malleolus, cortical continuity.</li><li><b>Fibula:</b> lateral malleolus and visible distal shaft.</li><li><b>Talus:</b> dome, neck/body and alignment.</li><li><b>Mortise:</b> medial/lateral/superior joint spaces and distal tibiofibular relationship.</li><li><b>Calcaneus / foot:</b> inspect visible portions for an obvious associated injury.</li><li><b>Soft tissues:</b> swelling, effusion indicators, gas or foreign body where relevant.</li></ul>
+ </div>
+</section>
+</main>
+
+<main id="ottawa" class="hidden">
+<button class="back" data-home>← Back</button><h2>🦶 Ottawa Ankle Rules</h2>
+<div class="panel"><div class="panel-title">When ankle radiographs may be indicated</div><div class="panel-body">
+<p>For adults and children over 5 years in acute ankle trauma, the Ottawa Ankle Rules are a clinical decision aid used to determine whether radiography is required.</p>
+<div class="warn info"><b>Radiographs are indicated when:</b><ul><li>Inability to bear weight both immediately after injury and in the emergency/clinical assessment, or</li><li>Bone tenderness at the posterior edge/inferior tip of either malleolus, or</li><li>Inability to walk four steps.</li></ul></div>
+<p>Follow the current local/NHS protocol. Do not apply the rule in patients who fall outside its validated/exclusion criteria, such as very young children or patients whose neurological status/sensation or communication makes the assessment unreliable.</p>
+</div></div>
+<div class="panel"><div class="panel-title">Clinical reminder</div><div class="panel-body"><p>The Ottawa rules help decide whether imaging is needed; they do not replace clinical assessment, examination of the whole injured limb, or departmental protocols.</p></div></div>
+</main>
+
+<main id="trauma" class="hidden">
+<button class="back" data-home>← Back</button><h2>🚨 Ankle trauma workflow</h2>
+<div class="panel"><div class="panel-title">Quick workflow</div><div class="panel-body"><ol><li>Confirm identity, side and mechanism.</li><li>Check referral information and clinical decision criteria.</li><li>Assess pain, deformity, immobilisation and ability to move safely.</li><li>Apply local imaging criteria / Ottawa rules where appropriate.</li><li>Perform AP, mortise and lateral views when indicated, adapting positioning to the injury.</li><li>Evaluate alignment, mortise, cortical continuity and soft tissues.</li><li>Escalate/add views or imaging according to local protocol and clinical need.</li></ol></div></div>
+</main>
+
+<div class="footer">Educational/reference prototype. Not a substitute for local departmental protocols, IR(ME)R justification, clinical supervision or professional judgement. Positioning and exposure details vary by equipment, patient size, trauma condition and local practice.</div>
+</div>
 <script>
-function home(){document.getElementById('view').className='main hidden';document.getElementById('home').className='main';scrollTo(0,0)}
-function base(title,crumb,body){document.getElementById('home').className='main hidden';let v=document.getElementById('view');v.className='main';v.innerHTML='<button class="back" onclick="home()">← Home</button><div class="crumb">'+crumb+'</div><h1 class="title">'+title+'</h1>'+body+'<div class="footer"><b>RADPOCKET v0.6</b><br>Educational reference only. Not a substitute for local protocols, professional judgement, reporting, or clinical decision-making.</div>';scrollTo(0,0)}
-function exam(name,views,dont){base(name+' X-ray','GENERAL X-RAY', '<div class="tabs">'+views.map((x,i)=>'<button class="tab '+(!i?'active':'')+'">'+x+'</button>').join('')+'</div><div class="block quick"><h3>⚡ Quick View</h3><p><b>Check:</b> alignment → cortex → joints → soft tissues → clinical context.</p></div><div class="block"><h3>📍 Positioning</h3><ul><li>Position the patient as safely as the injury allows; do not force painful movement.</li><li>Use the required projections according to local protocol and clinical indication.</li><li>Adapt trauma positioning when the standard position is unsafe or not tolerated.</li></ul></div><div class="block"><h3>🎯 Image evaluation</h3><ul><li>Confirm required anatomy is included.</li><li>Assess alignment, cortical continuity and joint spaces.</li><li>Check rotation and motion artefact.</li><li>Review soft tissues and the entire visible examination.</li></ul></div><div class="block eye"><h3>👁️ Radiographer’s Eye</h3><ul><li>Prioritise patient safety over reproducing a textbook position.</li><li>Do not stop reviewing after finding the obvious abnormality.</li><li>An adequate radiograph does not automatically exclude occult injury.</li></ul></div><div class="block warn"><h3>🚨 Don't Miss</h3><ul>'+dont.split(', ').map(x=>'<li>'+x+'</li>').join('')+'</ul></div><div class="block"><h3>📚 Protocol note</h3><p>Projection selection and trauma modifications vary between departments. Follow the current local protocol and clinical pathway.</p></div>')}
-function problem(title,exams,checks){base(title,'CLINICAL PRESENTATION','<div class="block quick"><h3>🧭 Start here</h3><p>Use the mechanism and clinical findings to guide the appropriate imaging pathway.</p></div><div class="block"><h3>🩻 Relevant examinations</h3>'+exams.split(' • ').map(x=>'<span class="pill">'+x+'</span>').join('')+'</div><div class="block"><h3>🔎 What to check</h3><ul>'+checks.split(', ').map(x=>'<li>'+x+'</li>').join('')+'</ul></div><div class="block eye"><h3>👁️ Radiographer’s Eye</h3><p>Let the patient's condition guide positioning. Avoid unnecessary movement and adapt the examination where appropriate.</p></div>')}
-</script></body></html>
+const screens=[...document.querySelectorAll('main')];
+function show(id){screens.forEach(s=>s.classList.toggle('hidden',s.id!==id));window.scrollTo({top:0,behavior:'instant'});}
+document.addEventListener('click',e=>{
+ const open=e.target.closest('[data-open]'); if(open){show(open.dataset.open);return;}
+ if(e.target.closest('[data-home]')){show('home');return;}
+ const tab=e.target.closest('[data-tab]');
+ if(tab){
+   document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b===tab));
+   document.querySelectorAll('.tabpanel').forEach(p=>p.classList.add('hidden'));
+   document.getElementById('tab-'+tab.dataset.tab).classList.remove('hidden');
+ }
+});
+document.getElementById('search').addEventListener('input',e=>{
+ const q=e.target.value.trim().toLowerCase();
+ document.querySelectorAll('#home .card').forEach(c=>c.classList.toggle('hidden',q && !c.textContent.toLowerCase().includes(q)));
+});
+</script>
+</body>
+</html>
