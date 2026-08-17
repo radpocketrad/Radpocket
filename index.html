@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#101827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="RADPOCKET">
-<title>RADPOCKET v1.3 • Ankle Interactive Teaching</title>
+<title>RADPOCKET v1.4 • Ankle Interactive Teaching</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#172033;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:760px;margin:auto;min-height:100vh;background:#fff}
 header{background:#101827;color:#fff;padding:28px 18px}.brand{font-size:32px;font-weight:850}.sub{color:#cbd5e1;margin-top:4px}.search{margin-top:16px;background:#fff;border-radius:15px;padding:12px;color:#64748b}
 main{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card,.panel{background:#fff;border:1px solid #e1e5eb;border-radius:16px}.card{padding:16px;text-align:left}.card button{border:0;background:none;width:100%;text-align:left;padding:0;color:inherit}.card b{font-size:18px}.card small{display:block;color:#64748b;margin-top:5px}.back{border:0;background:#101827;color:#fff;border-radius:10px;padding:9px 13px;font-weight:700;margin-bottom:14px}.tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}.tabs button{white-space:nowrap;border:1px solid #d9dee6;background:#fff;border-radius:999px;padding:8px 12px;font-weight:700}.tabs button.active{background:#101827;color:#fff}.panel{margin:10px 0;overflow:hidden}.panel h3{font-size:17px;margin:0;padding:14px 16px;border-bottom:1px solid #e1e5eb}.body{padding:15px 16px;line-height:1.5}.info{padding:11px 12px;background:#eef3ff;border-radius:10px;margin:9px 0}.warn{padding:11px 12px;background:#fff5df;border-radius:10px;margin:9px 0}.good{padding:11px 12px;background:#effaf2;border-radius:10px;margin:9px 0}li{margin:5px 0}.hidden{display:none!important}.visual{background:#080a0e;border-radius:13px;padding:10px;margin:10px 0;color:#fff}.visual svg{width:100%;display:block}.xray{width:100%;max-height:560px;object-fit:contain;display:block;background:#05070b;border-radius:10px;cursor:zoom-in}.caption{font-size:12px;color:#cbd5e1;margin-top:7px}.xray-card{background:#080a0e;border-radius:13px;padding:10px;margin:10px 0;color:#fff}.xray-card h4{margin:4px 0 8px;color:#8fc7ff;font-size:16px}.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}.lightbox.hidden{display:none}.lightbox img{max-width:100%;max-height:92vh;object-fit:contain}.lightbox button{position:absolute;top:14px;right:14px;border:0;border-radius:999px;background:#fff;color:#111;width:42px;height:42px;font-size:22px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini div{border:1px solid #e1e5eb;border-radius:10px;padding:10px;background:#fff}.mini b{display:block}.mini span{font-size:12px;color:#64748b}.footer{padding:18px;color:#64748b;font-size:11px;line-height:1.5}
 
-/* v1.3 interactive teaching layer — added without replacing the existing app */
+/* v1.4 interactive teaching layer — added without replacing the existing app */
 .teach-xray{position:relative;background:#080a0e;border-radius:13px;padding:10px;margin:10px 0;color:#fff}
 .teach-xray img{width:100%;max-height:620px;object-fit:contain;display:block;border-radius:10px;cursor:pointer}
 .teach-xray .overlay{position:absolute;inset:10px;pointer-events:none}
@@ -24,11 +24,20 @@ main{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.car
 .teach-controls button.active{background:#101827;color:#fff}
 .teach-hint{font-size:12px;color:#64748b;margin:6px 0 12px}
 
+
+.anatomy-sketch{background:#0b0e14;border-radius:14px;padding:12px;margin:12px 0;color:#fff}
+.anatomy-sketch img{width:100%;display:block;border-radius:10px;background:#fff}
+.anatomy-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.anatomy-legend div{background:#141a24;border:1px solid #283244;border-radius:10px;padding:9px}
+.anatomy-legend b{display:block;color:#fff}
+.anatomy-legend span{display:block;color:#b8c2d1;font-size:12px;margin-top:3px}
+.label-note{font-size:12px;color:#b8c2d1;line-height:1.45;margin-top:8px}
+
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand">RADPOCKET</div><div class="sub">Emergency Radiography · v1.3</div><div class="search">🔎 Ankle reference & teaching module</div></header>
+<header><div class="brand">RADPOCKET</div><div class="sub">Emergency Radiography · v1.4</div><div class="search">🔎 Ankle reference & teaching module</div></header>
 
 <main id="home">
 <h2>Start with the examination</h2>
@@ -170,20 +179,39 @@ main{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.car
   <div class="state-badge">Original</div>
   <div class="overlay hidden" id="overlay-lateral">
     <span class="marker" style="left:4%;top:16%">Distal tibia</span>
-    <span class="marker" style="right:3%;top:36%">Distal fibula</span>
-    <span class="marker" style="right:4%;top:50%">Lateral malleolus</span>
-    <span class="marker" style="left:34%;top:48%">Talar dome</span>
-    <span class="marker" style="left:3%;top:67%">Calcaneus</span>
-    <span class="marker" style="right:5%;top:70%">Talus</span>
-    <span class="marker" style="left:34%;top:39%">Tibiotalar joint</span>
+    <span class="marker" style="right:3%;top:38%">Distal fibula</span>
+    <span class="marker" style="left:39%;top:53%">Tibiotalar joint</span>
+    <span class="marker" style="left:48%;top:58%">Talar dome</span>
+    <span class="marker" style="left:42%;top:65%">Talus</span>
+    <span class="marker" style="left:3%;top:77%">Calcaneus</span>
   </div>
-  <div class="assessment hidden" id="assessment-lateral"><b>Assessment:</b> true lateral/rotation • talar dome relationship • distal tibia/fibula • posterior malleolar region • tibiotalar alignment • calcaneus • soft tissues.</div>
+  <div class="assessment hidden" id="assessment-lateral"><b>Assessment:</b> true lateral/rotation • distal tibia and fibula relationship • tibiotalar alignment • talar dome • posterior malleolar region • subtalar region • calcaneus • soft tissues.</div>
 </div>
 <div class="teach-controls" data-controls="lateral">
   <button class="active" data-state="0">Original</button><button data-state="1">Labels</button><button data-state="2">Assessment</button>
 </div>
 <div class="teach-hint">Tap the image to move to the next teaching state.</div>
+<div class="label-note"><b>Label accuracy:</b> on the lateral view the distal fibula is partly superimposed by the tibia. The labels are intentionally placed on the reliable bone regions rather than guessing at a separate lateral malleolus outline.</div>
 </div>
+
+
+
+
+<h3>🦴 Anatomy — Lateral ankle</h3>
+<div class="anatomy-sketch">
+  <img src="anatomy-ankle-lateral.png" alt="Lateral ankle anatomy teaching sketch">
+  <div class="anatomy-legend">
+    <div><b>Distal tibia</b><span>Forms the tibial plafond and the medial side of the ankle mortise.</span></div>
+    <div><b>Distal fibula</b><span>Forms the lateral malleolus and contributes to lateral ankle stability.</span></div>
+    <div><b>Tibiotalar joint</b><span>The main ankle articulation between the tibia and talus.</span></div>
+    <div><b>Talar dome</b><span>The superior articular surface of the talus.</span></div>
+    <div><b>Talus</b><span>Lies between the distal tibia/fibula and the calcaneus.</span></div>
+    <div><b>Calcaneus</b><span>The largest tarsal bone and the main heel bone.</span></div>
+    <div><b>Subtalar joint</b><span>Articulation between the talus and calcaneus, important for hindfoot motion.</span></div>
+    <div><b>Medial and lateral malleoli</b><span>Distal projections of the tibia and fibula that form the ankle mortise.</span></div>
+  </div>
+</div>
+<div class="info"><b>Learning sequence:</b> identify the bones first, then the joints, then assess alignment and cortical continuity on the radiograph.</div>
 
 <h3>Teaching checklist</h3>
 <div class="good"><b>RADPOCKET method:</b> Coverage → Position → Exposure → Anatomy → Alignment → Pathology → Soft tissues.</div>
@@ -191,7 +219,7 @@ main{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.car
 <div class="warn"><b>Important:</b> educational reference only. Follow current departmental protocols, scope of practice and clinical governance.</div>
 </div></section>
 
-<div class="footer"><b>RADPOCKET v1.3</b><br>Educational reference only. Follow current departmental protocols, clinical governance and professional judgement.</div>
+<div class="footer"><b>RADPOCKET v1.4</b><br>Educational reference only. Follow current departmental protocols, clinical governance and professional judgement.</div>
 </main>
 
 <main id="rulesScreen" class="hidden"><button class="back" data-home>← Home</button><h2>Clinical decision aids</h2></main>
@@ -222,7 +250,7 @@ document.addEventListener("click",function(e){
  }
 });
 
-/* v1.3 interactive teaching states */
+/* v1.4 interactive teaching states */
 const teachState={ap:0,mortise:0,lateral:0};
 function setTeachState(id,state){
   teachState[id]=state;
