@@ -3,168 +3,253 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>RADPOCKET v1.3 — Emergency Radiography</title>
+<meta name="theme-color" content="#101827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="RADPOCKET">
+<title>RADPOCKET v1.3 • Ankle Interactive Teaching</title>
 <style>
-:root{--navy:#111827;--ink:#172033;--muted:#6b7280;--line:#e5e7eb;--card:#fff;--soft:#f7f8fb;--accent:#111827}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#fff}
-header{background:var(--navy);color:white;padding:28px 20px 24px;border-radius:0 0 24px 24px}
-.brand{font-size:30px;font-weight:800;letter-spacing:.04em}.sub{color:#cbd0da;margin-top:5px}
-.search{margin-top:20px;background:white;color:#7b8190;border-radius:18px;padding:16px 18px;font-size:17px}
-main{max-width:980px;margin:auto;padding:24px 18px 50px}
-h2{font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:#687080;margin:28px 0 12px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-button.card{border:1px solid var(--line);background:white;border-radius:18px;padding:18px;text-align:left;font-size:16px;box-shadow:0 1px 2px #00000008}
-.card strong{display:block;font-size:20px}.card span{display:block;color:var(--muted);margin-top:6px}
-.card:active{transform:scale(.99)}
-.hidden{display:none}
-.module{margin-top:18px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:white}
-.module-head{padding:20px;background:var(--soft);display:flex;justify-content:space-between;gap:12px;align-items:center}
-.module-head h1{font-size:25px;margin:0}.back{border:0;background:#e9ebef;border-radius:12px;padding:10px 14px;font-weight:700}
-.tabs{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--line);overflow:auto}
-.tabs button{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:999px;padding:10px 14px;font-weight:700}
-.tabs button.active{background:var(--navy);color:white}
-.view{padding:16px}.projection{display:none}.projection.active{display:block}
-.imagebox{position:relative;background:#111;border-radius:16px;overflow:hidden}
-.imagebox img{display:block;width:100%;height:auto}
-.caption{padding:12px 2px;color:var(--muted);font-size:14px}
-.tapnote{text-align:center;margin:10px 0 0;color:#6b7280;font-size:13px}
-.label-layer{position:absolute;inset:0;pointer-events:none}
-.lab{position:absolute;background:#fff;color:#111827;border-radius:8px;padding:5px 7px;font-size:12px;font-weight:800;box-shadow:0 2px 8px #0005}
-.line{position:absolute;height:2px;background:white;transform-origin:left center;box-shadow:0 0 2px #000}
-.assess{margin-top:14px;display:grid;gap:10px}
-.item{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fafafa}
-.item b{display:block;margin-bottom:4px}.item span{color:#5f6673;font-size:14px}
-.footer{margin-top:30px;color:#737987;font-size:12px;text-align:center}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.module-head{align-items:flex-start}.module-head h1{font-size:21px}}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#172033;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:760px;margin:auto;min-height:100vh;background:#fff}
+header{background:#101827;color:#fff;padding:28px 18px}.brand{font-size:32px;font-weight:850}.sub{color:#cbd5e1;margin-top:4px}.search{margin-top:16px;background:#fff;border-radius:15px;padding:12px;color:#64748b}
+main{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card,.panel{background:#fff;border:1px solid #e1e5eb;border-radius:16px}.card{padding:16px;text-align:left}.card button{border:0;background:none;width:100%;text-align:left;padding:0;color:inherit}.card b{font-size:18px}.card small{display:block;color:#64748b;margin-top:5px}.back{border:0;background:#101827;color:#fff;border-radius:10px;padding:9px 13px;font-weight:700;margin-bottom:14px}.tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}.tabs button{white-space:nowrap;border:1px solid #d9dee6;background:#fff;border-radius:999px;padding:8px 12px;font-weight:700}.tabs button.active{background:#101827;color:#fff}.panel{margin:10px 0;overflow:hidden}.panel h3{font-size:17px;margin:0;padding:14px 16px;border-bottom:1px solid #e1e5eb}.body{padding:15px 16px;line-height:1.5}.info{padding:11px 12px;background:#eef3ff;border-radius:10px;margin:9px 0}.warn{padding:11px 12px;background:#fff5df;border-radius:10px;margin:9px 0}.good{padding:11px 12px;background:#effaf2;border-radius:10px;margin:9px 0}li{margin:5px 0}.hidden{display:none!important}.visual{background:#080a0e;border-radius:13px;padding:10px;margin:10px 0;color:#fff}.visual svg{width:100%;display:block}.xray{width:100%;max-height:560px;object-fit:contain;display:block;background:#05070b;border-radius:10px;cursor:zoom-in}.caption{font-size:12px;color:#cbd5e1;margin-top:7px}.xray-card{background:#080a0e;border-radius:13px;padding:10px;margin:10px 0;color:#fff}.xray-card h4{margin:4px 0 8px;color:#8fc7ff;font-size:16px}.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}.lightbox.hidden{display:none}.lightbox img{max-width:100%;max-height:92vh;object-fit:contain}.lightbox button{position:absolute;top:14px;right:14px;border:0;border-radius:999px;background:#fff;color:#111;width:42px;height:42px;font-size:22px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini div{border:1px solid #e1e5eb;border-radius:10px;padding:10px;background:#fff}.mini b{display:block}.mini span{font-size:12px;color:#64748b}.footer{padding:18px;color:#64748b;font-size:11px;line-height:1.5}
+
+/* v1.3 interactive teaching layer — added without replacing the existing app */
+.teach-xray{position:relative;background:#080a0e;border-radius:13px;padding:10px;margin:10px 0;color:#fff}
+.teach-xray img{width:100%;max-height:620px;object-fit:contain;display:block;border-radius:10px;cursor:pointer}
+.teach-xray .overlay{position:absolute;inset:10px;pointer-events:none}
+.teach-xray .marker{position:absolute;background:rgba(255,255,255,.96);color:#111827;border-radius:7px;padding:5px 7px;font-size:11px;font-weight:800;line-height:1.1;box-shadow:0 2px 8px rgba(0,0,0,.55)}
+.teach-xray .state-badge{position:absolute;left:18px;top:18px;background:rgba(16,24,39,.88);color:#fff;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800}
+.teach-xray .assessment{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(16,24,39,.92);border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.35}
+.teach-controls{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
+.teach-controls button{border:1px solid #d9dee6;background:#fff;border-radius:999px;padding:7px 11px;font-weight:700}
+.teach-controls button.active{background:#101827;color:#fff}
+.teach-hint{font-size:12px;color:#64748b;margin:6px 0 12px}
+
 </style>
 </head>
 <body>
-<header>
-  <div class="brand">RADPOCKET</div>
-  <div class="sub">Emergency Radiography · v1.3</div>
-  <div class="search">🔎 Search examinations or presentations</div>
-</header>
+<div class="app">
+<header><div class="brand">RADPOCKET</div><div class="sub">Emergency Radiography · v1.3</div><div class="search">🔎 Ankle reference & teaching module</div></header>
 
 <main id="home">
-  <h2>Start with the examination</h2>
-  <div class="grid">
-    <button class="card" onclick="openModule()"><strong>🦴 Ankle</strong><span>AP · Mortise · Lateral</span></button>
-    <button class="card" disabled><strong>💪 Shoulder</strong><span>Coming next</span></button>
-    <button class="card" disabled><strong>Elbow</strong><span>Coming next</span></button>
-    <button class="card" disabled><strong>🖐️ Wrist</strong><span>Coming next</span></button>
-    <button class="card" disabled><strong>Hip</strong><span>Coming next</span></button>
-    <button class="card" disabled><strong>🦵 Knee</strong><span>Coming next</span></button>
-  </div>
-
-  <h2>Start with the patient problem</h2>
-  <div class="grid">
-    <button class="card" disabled><strong>🖐️ FOOSH</strong><span>Fall onto outstretched hand</span></button>
-    <button class="card" disabled><strong>🚶 Unable to weight-bear</strong><span>Lower-limb trauma</span></button>
-    <button class="card" disabled><strong>💥 Shoulder trauma</strong><span>Fall / direct impact</span></button>
-    <button class="card" disabled><strong>🚗 Road traffic trauma</strong><span>Multi-region injury</span></button>
-  </div>
+<h2>Start with the examination</h2>
+<div class="grid">
+<div class="card"><button data-open="ankle"><b>🦴 Ankle</b><small>AP · Mortise · Lateral · Trauma</small></button></div>
+<div class="card"><button disabled><b>💪 Shoulder</b><small>Coming next</small></button></div>
+<div class="card"><button disabled><b>🖐️ Wrist</b><small>Coming next</small></button></div>
+<div class="card"><button disabled><b>🦵 Knee</b><small>Coming next</small></button></div>
+</div>
+<h2>Patient problem</h2>
+<div class="grid">
+<div class="card"><button data-open="rules"><b>🦶 Ankle trauma</b><small>Ottawa rules and imaging pathway</small></button></div>
+<div class="card"><button data-open="trauma"><b>🚨 Unable to weight-bear</b><small>Trauma considerations</small></button></div>
+</div>
 </main>
 
 <main id="ankle" class="hidden">
-  <section class="module">
-    <div class="module-head">
-      <div><h1>🦴 Ankle</h1><div class="sub" style="color:#687080">Interactive teaching module</div></div>
-      <button class="back" onclick="closeModule()">← Home</button>
-    </div>
-    <div class="tabs">
-      <button class="active" onclick="showProj('ap',this)">AP</button>
-      <button onclick="showProj('mortise',this)">Mortise</button>
-      <button onclick="showProj('lateral',this)">Lateral</button>
-    </div>
-    <div class="view">
+<button class="back" data-home>← Home</button>
+<h2>🦴 Ankle X-ray</h2>
+<div class="tabs" id="ankleTabs">
+<button class="active" data-tab="overview">Overview</button>
+<button data-tab="visuals">Visuals</button>
+<button data-tab="ap">AP</button>
+<button data-tab="mortise">Mortise</button>
+<button data-tab="lateral">Lateral</button>
+<button data-tab="trauma">Trauma</button>
+<button data-tab="evaluate">Evaluate</button>
+<button data-tab="anatomy">Anatomy</button>
+<button data-tab="rules">Rules</button>
+<button data-tab="teach">🩻 Teach</button>
+</div>
 
-      <article id="ap" class="projection active">
-        <div class="imagebox" onclick="cycle(this,'ap')">
-          <img src="ankle-ap.jpg" alt="Ankle AP radiograph">
-          <div class="label-layer hidden" id="labels-ap">
-            <span class="lab" style="left:4%;top:18%">Distal tibia</span>
-            <span class="lab" style="right:4%;top:35%">Fibula</span>
-            <span class="lab" style="left:3%;top:55%">Medial malleolus</span>
-            <span class="lab" style="right:3%;top:61%">Lateral malleolus</span>
-            <span class="lab" style="left:35%;top:70%">Talar dome</span>
-            <span class="lab" style="right:18%;top:79%">Talus</span>
-          </div>
-        </div>
-        <div class="caption"><b>AP ankle</b> · tap the radiograph to cycle Original → Labels → Assessment.</div>
-        <div class="assess hidden" id="assess-ap">
-          <div class="item"><b>Alignment</b><span>Assess the tibiotalar relationship and overall alignment.</span></div>
-          <div class="item"><b>Mortise</b><span>Check the medial and lateral sides of the ankle mortise for asymmetry or widening.</span></div>
-          <div class="item"><b>Bone</b><span>Trace the distal tibia, medial malleolus, distal fibula and talus for cortical disruption.</span></div>
-          <div class="item"><b>Soft tissues</b><span>Look for swelling, effusion and other soft-tissue abnormalities.</span></div>
-        </div>
-      </article>
+<section id="overview" class="panel tabview"><h3>Quick View</h3><div class="body">
+<div class="info"><b>Standard ankle series:</b> AP, mortise and lateral, according to local protocol and clinical indication.</div>
+<h3>Core checks</h3><ul><li>Correct patient and side.</li><li>Required anatomy included.</li><li>Positioning appropriate for the projection.</li><li>Exposure and sharpness adequate.</li><li>Systematically assess bones, mortise, alignment and soft tissues.</li></ul>
+<h3>Common indications</h3><ul><li>Acute trauma, pain or swelling.</li><li>Suspected fracture or dislocation.</li><li>Follow-up when requested.</li></ul>
+</div></section>
 
-      <article id="mortise" class="projection">
-        <div class="imagebox" onclick="cycle(this,'mortise')">
-          <img src="ankle-mortise.jpg" alt="Ankle mortise radiograph">
-          <div class="label-layer hidden" id="labels-mortise">
-            <span class="lab" style="left:4%;top:18%">Distal tibia</span>
-            <span class="lab" style="right:3%;top:30%">Fibula</span>
-            <span class="lab" style="left:3%;top:57%">Medial malleolus</span>
-            <span class="lab" style="right:3%;top:58%">Lateral malleolus</span>
-            <span class="lab" style="left:32%;top:69%">Talar dome</span>
-            <span class="lab" style="right:15%;top:76%">Talus</span>
-            <span class="lab" style="left:37%;top:43%">Ankle mortise</span>
-          </div>
-        </div>
-        <div class="caption"><b>Mortise view</b> · tap the radiograph to cycle Original → Labels → Assessment.</div>
-        <div class="assess hidden" id="assess-mortise">
-          <div class="item"><b>Mortise opening</b><span>Assess the tibiotalar joint space around the talar dome and look for asymmetry.</span></div>
-          <div class="item"><b>Distal tibiofibular relationship</b><span>Assess the syndesmotic region for abnormal widening or malalignment.</span></div>
-          <div class="item"><b>Medial clear space</b><span>Assess the space between the medial malleolus and medial talus, considering projection and positioning.</span></div>
-          <div class="item"><b>Fracture check</b><span>Trace both malleoli and the talar dome/cortex systematically.</span></div>
-        </div>
-      </article>
+<section id="visuals" class="panel tabview hidden"><h3>🖼️ Positioning visuals</h3><div class="body">
+<div class="info"><b>Original schematics:</b> simplified educational diagrams showing patient/detector/CR relationships.</div>
+<div class="visual"><svg viewBox="0 0 520 230"><rect x="280" y="20" width="150" height="180" rx="8" fill="#fff" stroke="#9aa4b5" stroke-width="3"/><path d="M170 55q-35 25-5 85l55 40 25-30-35-55 5-55z" fill="#cbd2dc"/><circle cx="210" cy="105" r="18" fill="#aeb8c6"/><line x1="210" y1="105" x2="355" y2="105" stroke="#8b78df" stroke-width="4" stroke-dasharray="8 6"/><text x="375" y="100" fill="#fff" font-size="14">CR → ankle</text></svg><p>AP: ankle supported, minimise unwanted rotation, centre to ankle joint.</p></div>
+<div class="visual"><svg viewBox="0 0 520 230"><rect x="280" y="20" width="150" height="180" rx="8" fill="#fff" stroke="#9aa4b5" stroke-width="3"/><path d="M170 55l60 35 15 70-55 35-45-45 10-70z" fill="#cbd2dc"/><circle cx="205" cy="110" r="18" fill="#aeb8c6"/><path d="M150 130a70 70 0 0 0 70-70" fill="none" stroke="#f5c542" stroke-width="4"/><text x="15" y="35" fill="#fff" font-size="14">Mortise rotation concept</text></svg><p>Mortise: commonly taught around 15–20° internal rotation, but follow local protocol and do not force trauma.</p></div>
+<div class="visual"><svg viewBox="0 0 520 230"><rect x="280" y="20" width="150" height="180" rx="8" fill="#fff" stroke="#9aa4b5" stroke-width="3"/><path d="M180 50h55l35 55-25 65-65 25-20-55 20-60z" fill="#cbd2dc"/><circle cx="220" cy="115" r="18" fill="#aeb8c6"/><line x1="220" y1="115" x2="355" y2="115" stroke="#8b78df" stroke-width="4" stroke-dasharray="8 6"/></svg><p>Lateral: affected side closest, true lateral as tolerated, include distal tibia/fibula and relevant adjacent anatomy.</p></div>
+</div></section>
 
-      <article id="lateral" class="projection">
-        <div class="imagebox" onclick="cycle(this,'lateral')">
-          <img src="ankle-lateral.jpg" alt="Ankle lateral radiograph">
-          <div class="label-layer hidden" id="labels-lateral">
-            <span class="lab" style="left:4%;top:15%">Distal tibia</span>
-            <span class="lab" style="right:4%;top:42%">Talus</span>
-            <span class="lab" style="left:6%;top:65%">Calcaneus</span>
-            <span class="lab" style="right:5%;top:67%">Navicular</span>
-            <span class="lab" style="left:36%;top:55%">Tibiotalar joint</span>
-            <span class="lab" style="right:3%;top:83%">Base of 5th metatarsal</span>
-          </div>
-        </div>
-        <div class="caption"><b>Lateral ankle</b> · tap the radiograph to cycle Original → Labels → Assessment.</div>
-        <div class="assess hidden" id="assess-lateral">
-          <div class="item"><b>True lateral</b><span>Assess superimposition of the distal fibula and tibia and appropriate lateral positioning.</span></div>
-          <div class="item"><b>Alignment</b><span>Assess the tibiotalar relationship and talar position.</span></div>
-          <div class="item"><b>Bone</b><span>Trace the distal tibia, fibula, talus and calcaneus for cortical interruption.</span></div>
-          <div class="item"><b>Soft tissues</b><span>Look for swelling and joint effusion; review the posterior ankle soft tissues.</span></div>
-        </div>
-      </article>
+<section id="ap" class="panel tabview hidden"><h3>AP ankle</h3><div class="body">
+<div class="xray-card"><img class="xray" src="ankle-ap.jpg" alt="Anonymised ankle AP radiograph" data-zoom><div class="caption">Your anonymised AP radiograph • Tap to zoom</div></div><h3>Positioning</h3><ul><li>Supine or seated with leg supported.</li><li>Foot/ankle in AP position as tolerated; avoid unnecessary rotation.</li><li>Centre to the ankle joint according to local protocol.</li></ul><h3>Image criteria</h3><ul><li>Distal tibia/fibula and ankle joint included.</li><li>Malleoli and talus demonstrated.</li><li>Minimal unwanted rotation and motion.</li></ul></div></section>
 
-      <p class="tapnote">Tap the X-ray to change teaching state. Tap again to continue.</p>
-    </div>
-  </section>
-  <div class="footer">Educational/reference prototype. Always follow local departmental protocol, scope of practice and clinical governance.</div>
+<section id="mortise" class="panel tabview hidden"><h3>Mortise — your radiograph</h3><div class="body">
+<div class="xray-card">
+<img class="xray" src="ankle-mortise.jpg" alt="Anonymised ankle mortise radiograph" data-zoom>
+<div class="caption">Anonymised teaching radiograph • Tap image to zoom</div>
+</div>
+<div class="info"><b>Projection:</b> AP mortise view. Common teaching position uses approximately 15–20° internal rotation of the leg/foot to open the ankle mortise; follow local protocol and never force rotation in acute trauma.</div>
+<h3>Positioning</h3>
+<ul><li>Patient supine or seated with the affected leg supported.</li><li>Align the ankle so the detector is centred to the joint.</li><li>Internally rotate the entire leg/foot as required by local protocol, commonly around 15–20°.</li><li>Keep the foot relaxed and avoid unnecessary plantarflexion/dorsiflexion.</li><li>Centre to the ankle joint and collimate to include the distal tibia/fibula and ankle joint.</li></ul>
+<h3>Image criteria</h3>
+<ul><li>Medial and lateral malleoli demonstrated.</li><li>Tibial plafond and talar dome clearly seen.</li><li>Medial, lateral and superior joint spaces assessable.</li><li>Distal tibiofibular relationship demonstrated.</li><li>Minimal unwanted rotation or motion.</li></ul>
+<h3>What to assess</h3>
+<div class="mini"><div><b>Mortise</b><span>Overall congruity and symmetry.</span></div><div><b>Talar alignment</b><span>Look for displacement or tilt.</span></div><div><b>Malleoli</b><span>Trace each cortex for fracture.</span></div><div><b>Syndesmosis</b><span>Assess distal tibiofibular relationship in context.</span></div></div>
+<div class="good"><b>Teaching habit:</b> trace the tibial plafond → medial malleolus → talus → lateral malleolus → distal fibula before moving on.</div>
+<div class="warn"><b>Common errors:</b> insufficient rotation, excessive rotation, poor centring, inadequate collimation, or forcing a painful ankle into position.</div>
+</div></section>
+
+<section id="lateral" class="panel tabview hidden"><h3>Lateral — your radiograph</h3><div class="body">
+<div class="xray-card">
+<img class="xray" src="ankle-lateral.jpg" alt="Anonymised ankle lateral radiograph" data-zoom>
+<div class="caption">Anonymised teaching radiograph • Tap image to zoom</div>
+</div>
+<div class="info"><b>Projection:</b> lateral ankle. Aim for a true lateral as patient condition allows; follow local trauma protocol where positioning must be modified.</div>
+<h3>Positioning</h3>
+<ul><li>Affected side closest to the detector.</li><li>Leg supported and knee/ankle positioned for a true lateral as tolerated.</li><li>Avoid unwanted rotation; do not force a painful or unstable injury.</li><li>Centre to the ankle joint.</li><li>Collimate to include distal tibia/fibula, talus and relevant adjacent anatomy.</li></ul>
+<h3>Image criteria</h3>
+<ul><li>Talar domes should be closely superimposed for a true lateral.</li><li>Distal tibia and fibula included.</li><li>Ankle joint and talus demonstrated.</li><li>Calcaneus and relevant adjacent anatomy included.</li><li>Sharp cortical and trabecular detail with minimal motion.</li></ul>
+<h3>What to assess</h3>
+<div class="mini"><div><b>Alignment</b><span>Tibiotalar relationship and overall alignment.</span></div><div><b>Posterior malleolus</b><span>Inspect carefully on the lateral.</span></div><div><b>Talus</b><span>Check dome, body and visible neck.</span></div><div><b>Soft tissues</b><span>Look for swelling, effusion or other clues.</span></div></div>
+<div class="good"><b>Teaching habit:</b> trace the distal tibia → posterior malleolar region → talus → calcaneus, then review the soft tissues.</div>
+<div class="warn"><b>Common errors:</b> obliquity, non-superimposed talar domes, inadequate coverage, motion and excessive plantarflexion/dorsiflexion.</div>
+</div></section>
+
+<section id="trauma" class="panel tabview hidden"><h3>🚨 Trauma</h3><div class="body"><div class="warn"><b>Safety first:</b> don't force a painful or unstable ankle into routine positioning.</div><ul><li>Check mechanism, pain, deformity and immobilisation.</li><li>Maintain clinically required immobilisation.</li><li>Adapt positioning to patient tolerance and local trauma protocol.</li><li>Consider associated foot or proximal fibular injury when clinically indicated.</li><li>Escalate/add imaging according to local pathway.</li></ul></div></section>
+
+<section id="evaluate" class="panel tabview hidden"><h3>👀 Image evaluation</h3><div class="body"><div class="good"><b>Coverage → Position → Exposure → Anatomy → Pathology</b></div><ul><li>Correct side and marker.</li><li>Required distal tibia/fibula, talus and ankle joint included.</li><li>Mortise appropriately demonstrated.</li><li>Sharp cortical/trabecular detail.</li><li>Assess alignment and joint spaces.</li><li>Review soft tissues and visible adjacent anatomy.</li></ul><h3>Systematic search</h3><ol><li>Distal tibia and plafond.</li><li>Fibula and lateral malleolus.</li><li>Talus.</li><li>Mortise/alignment.</li><li>Visible foot and lower leg.</li><li>Soft tissues.</li></ol></div></section>
+
+<section id="anatomy" class="panel tabview hidden"><h3>🦴 Anatomy</h3><div class="body"><div class="mini"><div><b>Tibial plafond</b><span>Distal tibial articular surface.</span></div><div><b>Medial malleolus</b><span>Distal tibial projection.</span></div><div><b>Lateral malleolus</b><span>Distal fibular projection.</span></div><div><b>Talus</b><span>Forms the inferior ankle joint component.</span></div></div><div class="info">Assess the ankle as a relationship: tibial plafond + talus + malleoli + distal tibiofibular joint.</div></div></section>
+
+<section id="rules" class="panel tabview hidden"><h3>📋 Ottawa Ankle Rules</h3><div class="body"><div class="info"><b>Clinical decision aid:</b> follow current local/NHS protocol and apply only when appropriate.</div><ul><li>Posterior edge/inferior tip tenderness of the lateral malleolus.</li><li>Posterior edge/inferior tip tenderness of the medial malleolus.</li><li>Inability to bear weight both immediately after injury and in assessment, commonly assessed as four steps.</li></ul><p>For children, age and clinical circumstances matter; follow current paediatric guidance and local policy.</p></div></section>
+
+<section id="teach" class="panel tabview hidden"><h3>🩻 Teach — Interactive ankle radiographs</h3><div class="body">
+<div class="info"><b>Interactive teaching:</b> tap an X-ray or use the buttons to cycle <b>Original → Labels → Assessment</b>. The original radiograph is never altered.</div>
+
+<div class="xray-card">
+<h4>AP view</h4>
+<div class="teach-xray" data-teach="ap">
+  <img src="ankle-ap.jpg" alt="Anonymised ankle AP teaching radiograph">
+  <div class="state-badge">Original</div>
+  <div class="overlay hidden" id="overlay-ap">
+    <span class="marker" style="left:4%;top:15%">Distal tibia</span>
+    <span class="marker" style="right:4%;top:31%">Fibula</span>
+    <span class="marker" style="left:3%;top:55%">Medial malleolus</span>
+    <span class="marker" style="right:3%;top:57%">Lateral malleolus</span>
+    <span class="marker" style="left:34%;top:64%">Talar dome</span>
+    <span class="marker" style="right:12%;top:76%">Talus</span>
+  </div>
+  <div class="assessment hidden" id="assessment-ap"><b>Assessment:</b> coverage • rotation • distal tibia/fibula • malleoli • talar alignment • joint space • soft tissues.</div>
+</div>
+<div class="teach-controls" data-controls="ap">
+  <button class="active" data-state="0">Original</button><button data-state="1">Labels</button><button data-state="2">Assessment</button>
+</div>
+<div class="teach-hint">Tap the image to move to the next teaching state.</div>
+</div>
+
+<div class="xray-card">
+<h4>Mortise view</h4>
+<div class="teach-xray" data-teach="mortise">
+  <img src="ankle-mortise.jpg" alt="Anonymised ankle mortise teaching radiograph">
+  <div class="state-badge">Original</div>
+  <div class="overlay hidden" id="overlay-mortise">
+    <span class="marker" style="left:4%;top:17%">Distal tibia</span>
+    <span class="marker" style="right:3%;top:30%">Fibula</span>
+    <span class="marker" style="left:3%;top:54%">Medial malleolus</span>
+    <span class="marker" style="right:3%;top:57%">Lateral malleolus</span>
+    <span class="marker" style="left:31%;top:65%">Talar dome</span>
+    <span class="marker" style="right:12%;top:76%">Talus</span>
+    <span class="marker" style="left:36%;top:43%">Tibiotalar joint</span>
+  </div>
+  <div class="assessment hidden" id="assessment-mortise"><b>Assessment:</b> mortise congruity • medial clear space • lateral joint space • talar alignment • distal tibiofibular relationship • malleolar cortices.</div>
+</div>
+<div class="teach-controls" data-controls="mortise">
+  <button class="active" data-state="0">Original</button><button data-state="1">Labels</button><button data-state="2">Assessment</button>
+</div>
+<div class="teach-hint">Tap the image to move to the next teaching state.</div>
+</div>
+
+<div class="xray-card">
+<h4>Lateral view</h4>
+<div class="teach-xray" data-teach="lateral">
+  <img src="ankle-lateral.jpg" alt="Anonymised ankle lateral teaching radiograph">
+  <div class="state-badge">Original</div>
+  <div class="overlay hidden" id="overlay-lateral">
+    <span class="marker" style="left:4%;top:16%">Distal tibia</span>
+    <span class="marker" style="right:3%;top:36%">Distal fibula</span>
+    <span class="marker" style="right:4%;top:50%">Lateral malleolus</span>
+    <span class="marker" style="left:34%;top:48%">Talar dome</span>
+    <span class="marker" style="left:3%;top:67%">Calcaneus</span>
+    <span class="marker" style="right:5%;top:70%">Talus</span>
+    <span class="marker" style="left:34%;top:39%">Tibiotalar joint</span>
+  </div>
+  <div class="assessment hidden" id="assessment-lateral"><b>Assessment:</b> true lateral/rotation • talar dome relationship • distal tibia/fibula • posterior malleolar region • tibiotalar alignment • calcaneus • soft tissues.</div>
+</div>
+<div class="teach-controls" data-controls="lateral">
+  <button class="active" data-state="0">Original</button><button data-state="1">Labels</button><button data-state="2">Assessment</button>
+</div>
+<div class="teach-hint">Tap the image to move to the next teaching state.</div>
+</div>
+
+<h3>Teaching checklist</h3>
+<div class="good"><b>RADPOCKET method:</b> Coverage → Position → Exposure → Anatomy → Alignment → Pathology → Soft tissues.</div>
+<div class="info"><b>Label accuracy note:</b> labels have been limited to structures that can be identified reliably on the supplied projections. The lateral view deliberately avoids uncertain foot labels rather than guessing.</div>
+<div class="warn"><b>Important:</b> educational reference only. Follow current departmental protocols, scope of practice and clinical governance.</div>
+</div></section>
+
+<div class="footer"><b>RADPOCKET v1.3</b><br>Educational reference only. Follow current departmental protocols, clinical governance and professional judgement.</div>
 </main>
 
+<main id="rulesScreen" class="hidden"><button class="back" data-home>← Home</button><h2>Clinical decision aids</h2></main>
+<main id="traumaScreen" class="hidden"><button class="back" data-home>← Home</button><h2>Ankle trauma</h2></main>
+</div>
+<div id="lightbox" class="lightbox hidden" aria-label="Enlarged radiograph">
+  <button id="closeLightbox" aria-label="Close">×</button>
+  <img id="lightboxImg" src="" alt="Enlarged radiograph">
+</div>
 <script>
-function openModule(){document.getElementById('home').classList.add('hidden');document.getElementById('ankle').classList.remove('hidden');window.scrollTo(0,0)}
-function closeModule(){document.getElementById('ankle').classList.add('hidden');document.getElementById('home').classList.remove('hidden');window.scrollTo(0,0)}
-function showProj(id,btn){
- document.querySelectorAll('.projection').forEach(x=>x.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
- btn.classList.add('active');
+const home=document.getElementById("home"),ankle=document.getElementById("ankle");
+const lightbox=document.getElementById("lightbox"),lightboxImg=document.getElementById("lightboxImg");
+document.addEventListener("click",function(e){
+  const img=e.target.closest("[data-zoom]");
+  if(img){lightboxImg.src=img.src;lightbox.classList.remove("hidden");}
+  if(e.target.id==="closeLightbox" || e.target===lightbox){lightbox.classList.add("hidden");lightboxImg.src="";}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){lightbox.classList.add("hidden");lightboxImg.src="";}});
+function show(id){home.classList.add("hidden");ankle.classList.toggle("hidden",id!=="ankle");document.getElementById(id)?.classList.remove("hidden");window.scrollTo(0,0)}
+document.addEventListener("click",function(e){
+ const open=e.target.closest("[data-open]"); if(open){show(open.dataset.open);return}
+ if(e.target.closest("[data-home]")){home.classList.remove("hidden");ankle.classList.add("hidden");document.querySelectorAll(".tabview").forEach(x=>x.classList.add("hidden"));document.getElementById("overview").classList.remove("hidden");document.querySelectorAll("#ankleTabs button").forEach((b,i)=>b.classList.toggle("active",i===0));window.scrollTo(0,0);return}
+ const tab=e.target.closest("[data-tab]"); if(tab){
+   document.querySelectorAll("#ankleTabs button").forEach(b=>b.classList.toggle("active",b===tab));
+   document.querySelectorAll(".tabview").forEach(x=>x.classList.add("hidden"));
+   document.getElementById(tab.dataset.tab).classList.remove("hidden");
+   window.scrollTo(0,0);
+ }
+});
+
+/* v1.3 interactive teaching states */
+const teachState={ap:0,mortise:0,lateral:0};
+function setTeachState(id,state){
+  teachState[id]=state;
+  const box=document.querySelector('.teach-xray[data-teach="'+id+'"]');
+  if(!box)return;
+  const overlay=box.querySelector('.overlay');
+  const assessment=box.querySelector('.assessment');
+  const badge=box.querySelector('.state-badge');
+  overlay.classList.toggle('hidden',state!==1);
+  assessment.classList.toggle('hidden',state!==2);
+  badge.textContent=state===0?'Original':(state===1?'Labels':'Assessment');
+  const controls=document.querySelector('[data-controls="'+id+'"]');
+  if(controls) controls.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active',i===state));
 }
-const state={ap:0,mortise:0,lateral:0};
-function cycle(box,id){
- state[id]=(state[id]+1)%3;
- const labels=document.getElementById('labels-'+id);
- const assess=document.getElementById('assess-'+id);
- labels.classList.toggle('hidden',state[id]!==1);
- assess.classList.toggle('hidden',state[id]!==2);
-}
+document.addEventListener('click',function(e){
+  const teachImg=e.target.closest('.teach-xray[data-teach] img');
+  if(teachImg){
+    const id=teachImg.closest('.teach-xray').dataset.teach;
+    setTeachState(id,(teachState[id]+1)%3);
+    return;
+  }
+  const control=e.target.closest('.teach-controls button');
+  if(control){
+    const id=control.closest('.teach-controls').dataset.controls;
+    setTeachState(id,Number(control.dataset.state));
+  }
+});
+
 </script>
-</body>
-</html>
+</body></html>
